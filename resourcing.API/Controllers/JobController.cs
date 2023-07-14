@@ -28,9 +28,9 @@ namespace Resourcing.API.Controllers
 
         // GET api/<JobController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<JobDto> Get(Guid id)
         {
-            return "value";
+            return _jobService.GetJobById(id);
         }
 
         // POST api/<JobController>
@@ -39,7 +39,7 @@ namespace Resourcing.API.Controllers
         {
             try
             {
-                var postJob = _jobService.CreateJob(request.Name, request.Description);
+                var postJob = _jobService.CreateJob(request.Name, request.Description, request.StartDate, request.EndDate);
 
                 return Ok(postJob);
             }
@@ -53,16 +53,21 @@ namespace Resourcing.API.Controllers
             }
         }
 
-        // PUT api/<JobController>/5
+        // Put api/<JobController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put([FromBody] JobDto request, Guid id)
         {
+
+            var updateJob = _jobService.UpdateExistingJob(request, id);
+
+            return Ok(updateJob);
         }
 
         // DELETE api/<JobController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
+            _jobService.DeleteJob(id);
         }
     }
 }

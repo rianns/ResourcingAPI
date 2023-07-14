@@ -15,7 +15,7 @@ namespace Resourcing.Domain.Entities
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         [Column("JobID")]
-        public int JobId { get; set; }
+        public Guid JobId { get; set; }
         [ForeignKey("JobId")]
         public Job? Job { get; set; }
     }

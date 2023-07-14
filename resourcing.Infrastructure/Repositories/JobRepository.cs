@@ -13,12 +13,18 @@ namespace Resourcing.Infrastructure.Repositories
     public class JobRepository : IJobRepository
     {
         private readonly ResourcingDbContext _dbContext;
-        public static IEnumerable<Job>? jobs;
 
         public JobRepository(ResourcingDbContext dbContext) 
         { 
             _dbContext = dbContext;
         }
+
+        public Job GetJobById(Guid jobId)
+        {
+            Job? job = _dbContext.Jobs.FirstOrDefault(j => j.Id == jobId);
+            return job;
+        }
+
         public Job CreateJob(Job job)
         {
             _dbContext.Jobs.Add(job);
@@ -29,6 +35,22 @@ namespace Resourcing.Infrastructure.Repositories
         public IEnumerable<Job> GetAllJobs()
         {
             return _dbContext.Jobs.ToList();
+        }
+
+        public Job UpdateJob(Job job)
+        {
+            _dbContext.ChangeTracker.Clear();
+            _dbContext.Update(job);
+            _dbContext.SaveChanges();
+
+            return job;
+        }
+
+        public void DeleteJob(Job job)
+        {
+            _dbContext.ChangeTracker.Clear();
+            _dbContext.Jobs.Remove(job);
+            _dbContext.SaveChanges();
         }
     }
 }

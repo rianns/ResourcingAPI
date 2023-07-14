@@ -8,7 +8,7 @@ using Resourcing.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace Resourcing.API.Migrations
+namespace Resourcing.Infrastructure.Migrations
 {
     [DbContext(typeof(ResourcingDbContext))]
     partial class ResourcingDbContextModelSnapshot : ModelSnapshot
@@ -24,24 +24,28 @@ namespace Resourcing.API.Migrations
 
             modelBuilder.Entity("Resourcing.Domain.Entities.Job", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("JobID");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Job");
+                    b.ToTable("Job", (string)null);
                 });
 
             modelBuilder.Entity("Resourcing.Domain.Entities.Temp", b =>
@@ -55,8 +59,8 @@ namespace Resourcing.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("JobId")
-                        .HasColumnType("int")
+                    b.Property<Guid>("JobId")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("JobID");
 
                     b.Property<string>("LastName")
@@ -67,7 +71,7 @@ namespace Resourcing.API.Migrations
 
                     b.HasIndex("JobId");
 
-                    b.ToTable("Temp");
+                    b.ToTable("Temp", (string)null);
                 });
 
             modelBuilder.Entity("Resourcing.Domain.Entities.Temp", b =>

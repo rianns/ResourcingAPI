@@ -9,11 +9,11 @@ using Resourcing.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace Resourcing.API.Migrations
+namespace Resourcing.Infrastructure.Migrations
 {
     [DbContext(typeof(ResourcingDbContext))]
-    [Migration("20230713060946_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20230714015427_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,20 +27,24 @@ namespace Resourcing.API.Migrations
 
             modelBuilder.Entity("Resourcing.Domain.Entities.Job", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("JobID");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -58,8 +62,8 @@ namespace Resourcing.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("JobId")
-                        .HasColumnType("int")
+                    b.Property<Guid>("JobId")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("JobID");
 
                     b.Property<string>("LastName")
