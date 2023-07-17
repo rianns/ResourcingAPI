@@ -12,8 +12,8 @@ using Resourcing.Infrastructure.Persistence;
 namespace Resourcing.Infrastructure.Migrations
 {
     [DbContext(typeof(ResourcingDbContext))]
-    [Migration("20230714015427_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230717030109_CreateMigration")]
+    partial class CreateMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -45,7 +45,7 @@ namespace Resourcing.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Job", (string)null);
+                    b.ToTable("Job");
                 });
 
             modelBuilder.Entity("Resourcing.Domain.Entities.Temp", b =>
@@ -71,7 +71,7 @@ namespace Resourcing.Infrastructure.Migrations
 
                     b.HasIndex("JobId");
 
-                    b.ToTable("Temp", (string)null);
+                    b.ToTable("Temp");
                 });
 
             modelBuilder.Entity("Resourcing.Domain.Entities.Temp", b =>

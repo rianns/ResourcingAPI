@@ -11,14 +11,20 @@ namespace Resourcing.Application.Interfaces
     {
         // Get Temp by ID
 
+        Temp GetTempById(Guid id);
+
         // Get all Temps
 
+        IEnumerable<Temp> GetAllTemps();
+
         // Create new Temp
-        void CreateTemp(Temp temp);
+        Temp CreateTemp(Temp temp);
 
         // Update existing Temp
+        Temp UpdateTemp(Temp temp);
 
         // Delete existing Temp
+        Temp DeleteTemp(Temp temp);
 
     }
 }
